@@ -1,32 +1,18 @@
 <template>
 	<div class="ixinyi-index">
 		<div class="ixinyi-top">
-			<!-- <span class="ixinyi-top-left">博客后台管理系统</span> -->
+			<span class="ixinyi-top-left">后台管理系统</span>
 			<div class="ixinyi-top-right">
 				<span>admin</span>
 				<a href="">登出</a>
 			</div>
 		</div>
 		<div class="ixinyi-left">
-			<Menu :theme="theme" active-name="1" width="200px">
-				<MenuGroup title="内容管理">
-					<MenuItem name="1">
+			<Menu :theme="theme" :active-name="currentName" width="200px">
+				<MenuGroup :title="menu.title" v-for="(menu, index) in menus">
+					<MenuItem :name="ch.key" v-for="(ch, cindex) in menu.children">
 						<Icon type="document-text"></Icon>
-						文章管理
-					</MenuItem>
-					<MenuItem name="2">
-						<Icon type="chatbubbles"></Icon>
-						评论管理
-					</MenuItem>
-				</MenuGroup>
-				<MenuGroup title="统计分析">
-					<MenuItem name="3">
-						<Icon type="heart"></Icon>
-						用户留存
-					</MenuItem>
-					<MenuItem name="4">
-						<Icon type="heart-broken"></Icon>
-						流失用户
+						{{ch.name}}
 					</MenuItem>
 				</MenuGroup>
 			</Menu>
@@ -34,8 +20,8 @@
 		<div class="ixinyi-right">
 			<div class="ixinyi-breadcrumb">
 				<Breadcrumb separator="<b style='color:#888'>/</b>">
-					<BreadcrumbItem href="/">Home</BreadcrumbItem>
-					<BreadcrumbItem href="/components/breadcrumb">Components</BreadcrumbItem>
+					<BreadcrumbItem href="/">首页</BreadcrumbItem>
+					<BreadcrumbItem href="/home/breadcrumb">Components</BreadcrumbItem>
 					<BreadcrumbItem>Breadcrumb</BreadcrumbItem>
 				</Breadcrumb>
 			</div>
@@ -52,7 +38,32 @@
 		name: 'index',
 		data () {
 			return {
-				theme: 'light'
+				theme: 'light',
+				menus: [
+				{ title: '内容管理',
+				children: [
+				{
+					name: '文章管理',
+					key: 'articles'
+				},
+				{
+					name: '评论管理',
+					key: 'comments'
+				}
+				]},
+				{ title: '统计分析',
+				children: [
+				{
+					name: '用户留存',
+					key: 'users'
+				},
+				{
+					name: '流失用户',
+					key: 'usersmiss'
+				}
+				]}
+				],
+				currentName: 'articles'
 			}
 		}
 	}
@@ -98,9 +109,10 @@
 			left: 200px;
 			bottom: 0;
 			right: 0;
+			background: #eee;
 			.ixinyi-breadcrumb{
 				width: 100%;
-				padding: 10px;
+				padding: 15px;
 			}
 			.ixinyi-views{
 				position: absolute;
@@ -108,8 +120,9 @@
 				left: 10px;
 				right: 10px;
 				bottom: 10px;
-				background: #dedede;
-				border-radius: 4px;
+				border: 1px solid #dedede;
+				background: #fff;
+				// border-radius: 4px;
 				padding: 10px;
 			}
 		}
