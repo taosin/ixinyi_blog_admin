@@ -1,10 +1,10 @@
 <template>
 	<div class="ixinyi-index">
 		<div class="ixinyi-top">
-			<span class="ixinyi-top-left">后台管理系统</span>
+			<span class="ixinyi-top-left">{{textName}}</span>
 			<div class="ixinyi-top-right">
 				<span>admin</span>
-				<a href="">登出</a>
+				<a href="">{{textLogout}}</a>
 			</div>
 		</div>
 		<div class="ixinyi-left">
@@ -38,6 +38,8 @@
 		name: 'index',
 		data () {
 			return {
+				textName: '后台管理系统',
+				textLogout: '登出',
 				theme: 'light',
 				menus: [
 				{ title: '内容管理',
@@ -65,6 +67,16 @@
 				],
 				currentName: 'articles'
 			}
+		},
+		route: {
+			data (transition) {
+				console.log('test')
+			}
+		},
+		watch: {
+			'$route' (to, from) {
+				debugger
+			}
 		}
 	}
 </script>
@@ -90,7 +102,7 @@
 			}
 			.ixinyi-top-right{
 				float: right;
-				margin-right: 30px;
+				// margin-right: 30px;
 				font-size: 16px;
 			}
 		}
