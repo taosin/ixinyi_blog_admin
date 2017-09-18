@@ -1,22 +1,32 @@
 <template>
-	<div>
-		<div id="div3">
-			
-		</div>
+	<div class="index">
+		<editor v-model="content"></editor>
+		<button id="btn1">获取html</button>
 	</div>
 </template>
-
 <script>
-import wangEditor from 'wangeditor'
+import editor from '../widgets/editor.vue'
 export default {
 	name: 'index',
+	components: {
+		editor
+	},
+	data () {
+		return {
+			content: '请输入你想要输入的内容'
+		}
+	},
 	mounted () {
-		var E = wangEditor
-		var editor2 = new E('#div3')
-		editor2.create()
+	},
+	watch: {
+		content (val) {
+			debugger
+		}
 	}
 }
 </script>
 
 <style lang="less">
+.index{
+}
 </style>

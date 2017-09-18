@@ -119,12 +119,11 @@ export default {
 
 <style lang="less">
 .index-header{
-		// border: 1px solid;
-		padding: 10px 0;
-	}
-	.index-pagination{
-		padding: 10px 0;
-		float: right;
-	}
-	</style>
+	padding: 10px 0;
+}
+.index-pagination{
+	padding: 10px 0;
+	float: right;
+}
+</style>
 
