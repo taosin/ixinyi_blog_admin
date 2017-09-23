@@ -9,11 +9,14 @@ module.exports = {
   env: {
     browser: true,
   },
+  globals:{
+    'marked':true,
+  },
   // https://github.com/standard/standard/blob/master/docs/RULES-en.md
   extends: 'standard',
   // required to lint *.vue files
   plugins: [
-    'html'
+  'html'
   ],
   // add your custom rules here
   'rules': {
@@ -25,6 +28,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'spaced-comment': [2, "always"],
     'indent': 0,
-    'no-tabs': 0
+    'no-tabs': 0,
+    'no-unused-vars':0
   }
 }

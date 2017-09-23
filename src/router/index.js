@@ -21,11 +21,11 @@ export default new Router({
 			path: '/articles/list',
 			name: '文章管理|文章列表',
 			component: articlesList
-		},
-		{
-			path: '/articles/add',
-			name: '文章管理|发布文章',
-			component: articleAdd
 		}]
+	},
+	{
+		path: '/articles/add',
+		name: '文章管理|发布文章',
+		component: articleAdd
 	}]
 })

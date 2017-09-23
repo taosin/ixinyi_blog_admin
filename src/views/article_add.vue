@@ -1,15 +1,14 @@
 <template>
 	<div class="index">
-		<editor v-model="content"></editor>
-		<button id="btn1">获取html</button>
+		<markdown v-model="content"></markdown>
 	</div>
 </template>
 <script>
-import editor from '../widgets/editor.vue'
+import markdown from '../widgets/markdown/markdown.vue'
 export default {
 	name: 'index',
 	components: {
-		editor
+		markdown
 	},
 	data () {
 		return {
