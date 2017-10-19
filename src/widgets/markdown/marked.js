@@ -1285,4 +1285,4 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
   return this || (typeof window !== 'undefined' ? window : global);
 }());
 
-export default marked;
+export default marked

@@ -27,5 +27,6 @@ export default {
 
 <style lang="less">
 .index{
+	padding: 10px;
 }
 </style>
