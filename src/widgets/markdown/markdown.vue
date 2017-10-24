@@ -3,9 +3,6 @@
 		<div class="left-edit">
 			<textarea v-model="val" debounce="300"></textarea>
 		</div>
-		<div class="right-view">
-			<div class="marked" v-html="vals"></div>
-		</div>
 	</div>
 </template>
 <script>
@@ -31,11 +28,7 @@ export default{
 	width: 100%;
 	height: 100%;
 	.left-edit{
-		position: absolute;
-		left: 0;
-		width: 50%;
-		top: 0;
-		bottom: 0;
+		background: #ddd;
 		textarea{
 			width: 100%;
 			height: 100%;
@@ -45,14 +38,6 @@ export default{
 		textarea:focus{
 			outline: none;
 		}
-	}
-	.right-view{
-		background: #ddd;
-		position: absolute;
-		right: 0;
-		left: 50%;
-		top: 0;
-		bottom: 0;
 	}
 }
 </style>
