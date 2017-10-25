@@ -4,6 +4,7 @@ import index from '@/index'
 import home from '@/views/home'
 import articlesList from '@/views/articles_mng'
 import articleAdd from '@/views/article_add'
+import readline from '@/views/readline'
 
 Vue.use(Router)
 
@@ -21,6 +22,11 @@ export default new Router({
 			path: '/articles/list',
 			name: '文章管理|文章列表',
 			component: articlesList
+		},
+		{
+			path: 'articles/readline',
+			name: '文章管理|阅读轨迹',
+			component: readline
 		}]
 	},
 	{

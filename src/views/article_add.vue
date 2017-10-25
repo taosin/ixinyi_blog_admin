@@ -5,45 +5,67 @@
 		</div>
 		<div class="index-m-tag-cate index-m-div">
 			<div class="index-m-tag">
-				<Input v-model="title" placeholder="标签" size="large"></Input>
+				<Input v-model="tag" placeholder="标签" size="large"></Input>
 			</div>
 			<div class="index-m-cate">
-				<Input v-model="title" placeholder="分类" size="large"></Input>
+				<Input v-model="cate" placeholder="分类" size="large"></Input>
 			</div>
 		</div>
 		<div class="index-m-toolbar index-m-div">
-			<Tooltip content="插入图片">
-				<span class="toolbar-btn">
-					<Icon type="image"></Icon>
-				</span>
+			<Tooltip content="插入图片" placement="top-start">
+				<Upload action="//jsonplaceholder.typicode.com/posts/" :show-upload-list="false">
+					<span class="toolbar-btn">
+						<Icon type="image"></Icon>
+					</span>
+				</Upload>
 			</Tooltip>
-			<Tooltip content="预览">
+			<Tooltip content="预览" placement="top-start">
 				<span class="toolbar-btn">
 					<Icon type="android-laptop"></Icon>
 				</span>
 			</Tooltip>
-			<Button type="ghost" icon="ios-paperplane-outline" style="float:right">发布文章</Button>
+			<Button type="ghost" icon="ios-paperplane-outline" style="float:right" @click="addArticle" :loading="isLoading">发布文章</Button>
 		</div>
 		<div class="index-m-textarea index-m-div">
-			<textarea v-model="content" debounce="300"></textarea>
+			<textarea v-model="content" debounce="300" placeholder="请输入你想要输入的内容"></textarea>
 		</div>
 	</div>
 </template>
 <script>
+
+function close () {
+     if (document.body.clientWidth - event.clientX < 170 && event.clientY < 0 || event.altKey) {
+        alert('this is a test')
+     }
+}
+window.onbeforeunload = close
+
 export default {
 	name: 'index',
 	components: {
 	},
 	data () {
 		return {
-			content: '请输入你想要输入的内容',
-			title: ''
+			content: '',
+			title: '',
+			tag: '',
+			cate: '',
+			isLoading: false
 		}
 	},
 	mounted () {
 	},
 	watch: {
 		content (val) {
+		}
+	},
+	methods: {
+		addArticle () {
+			this.isLoading = true
+			setTimeout(() => {
+				this.isLoading = false
+				this.$Message.success('文章发布成功!')
+			}, 2000)
 		}
 	}
 }
@@ -77,6 +99,8 @@ export default {
 			min-height: 1000px;
 			border:none;
 			resize:none;
+			font-size: 14px;
+			padding: 10px;
 		}
 		textarea:focus{
 			outline: none;
