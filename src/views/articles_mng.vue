@@ -125,5 +125,6 @@ export default {
 	padding: 10px 0;
 	float: right;
 }
+
 </style>
 

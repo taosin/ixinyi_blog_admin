@@ -136,6 +136,7 @@
 				background: #fff;
 				// border-radius: 4px;
 				padding: 10px;
+				overflow: auto;
 			}
 		}
 	}

@@ -2,10 +2,10 @@
 <template>
 	<div class="index articles-mng">
 		<div class="index-main">
-			<Table border :columns="columns7" :data="data6"></Table>
+			<Table border :columns="columns" :data="dataList"></Table>
 		</div>
 		<div class="index-pagination">
-			<Page :total="100" show-elevator show-total show-sizer></Page>
+			<Page :total="total" show-total :page-size="limit" @on-change="changePage"></Page>
 		</div>
 	</div>
 </template>
@@ -15,18 +15,18 @@ export default {
 	name: 'articles_mng',
 	data () {
 		return {
-			columns7: [
+			columns: [
 			{
 				title: '标题',
-				key: 'name'
+				key: 'title'
 			},
 			{
 				title: '阅读时间',
-				key: 'address'
+				key: 'createdAt'
 			},
 			{
 				title: 'url',
-				key: 'address'
+				key: 'url'
 			},
 			{
 				title: '操作',
@@ -64,40 +64,35 @@ export default {
 				}
 			}
 			],
-			data6: [
-			{
-				name: '王小明',
-				age: 18,
-				address: '北京市朝阳区芍药居'
-			},
-			{
-				name: '张小刚',
-				age: 25,
-				address: '北京市海淀区西二旗'
-			},
-			{
-				name: '李小红',
-				age: 30,
-				address: '上海市浦东新区世纪大道'
-			},
-			{
-				name: '周小伟',
-				age: 26,
-				address: '深圳市南山区深南大道'
-			}
-			]
+			dataList: [],
+			total: 0,
+			limit: 20,
+			start: 0
 		}
 	},
 	mounted () {
-		const data = {}
-		data.state = 1
-		this.axios.get('/articlesCount', {
-			params: data
-		}).then((result) => {
-			debugger
-		})
+		this.initData(0)
 	},
 	methods: {
+		// 初始化数据
+		initData (start) {
+			const data = {}
+			data.page = {
+				start: start,
+				limit: this.limit
+			}
+			this.axios.get('/articles/readInfos', {
+				params: data
+			}).then((result) => {
+				this.dataList = result.data.records
+				this.total = result.data.total
+			})
+		},
+		// 翻页
+		changePage (currentPage) {
+			let start = (currentPage - 1) * this.limit
+			this.initData(start)
+		},
 		onAdd () {
 			this.$router.push('/articles/add')
 		}
