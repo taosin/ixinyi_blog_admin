@@ -11,6 +11,7 @@ module.exports = {
   },
   globals:{
     'marked':true,
+    'Vue':true
   },
   // https://github.com/standard/standard/blob/master/docs/RULES-en.md
   extends: 'standard',

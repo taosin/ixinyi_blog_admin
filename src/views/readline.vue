@@ -88,6 +88,15 @@ export default {
 			]
 		}
 	},
+	mounted () {
+		const data = {}
+		data.state = 1
+		this.axios.get('/articlesCount', {
+			params: data
+		}).then((result) => {
+			debugger
+		})
+	},
 	methods: {
 		onAdd () {
 			this.$router.push('/articles/add')

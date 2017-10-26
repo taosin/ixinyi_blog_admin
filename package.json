@@ -14,12 +14,14 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "axios": "^0.17.0",
     "iview": "^2.3.2",
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
     "markdown-js": "0.0.3",
     "marked": "^0.3.6",
     "vue": "^2.4.2",
+    "vue-axios": "^2.0.2",
     "vue-router": "^2.7.0",
     "wangeditor": "^3.0.8"
   },
