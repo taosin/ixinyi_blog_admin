@@ -2,7 +2,7 @@
 <template>
 	<div class="index articles-mng">
 		<div class="index-header">
-			<Button type="info" @click="onAdd">新增文章</Button>
+			<Button type="info" @click="onAdd">发布文章</Button>
 		</div>
 		<div class="index-main">
 			<Table border :columns="columns7" :data="data6"></Table>

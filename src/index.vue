@@ -43,6 +43,7 @@
 				theme: 'light',
 				menus: [
 				{ title: '内容管理',
+				key: 'articles',
 				children: [
 				{
 					name: '文章管理',
@@ -51,6 +52,10 @@
 				{
 					name: '评论管理',
 					key: 'comments'
+				},
+				{
+					name: '阅读轨迹',
+					key: 'readline'
 				}
 				]},
 				{ title: '统计分析',
@@ -75,7 +80,7 @@
 		},
 		watch: {
 			'$route' (to, from) {
-				debugger
+				// debugger
 			}
 		}
 	}

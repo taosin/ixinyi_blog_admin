@@ -32,14 +32,6 @@
 	</div>
 </template>
 <script>
-
-function close () {
-     if (document.body.clientWidth - event.clientX < 170 && event.clientY < 0 || event.altKey) {
-        alert('this is a test')
-     }
-}
-window.onbeforeunload = close
-
 export default {
 	name: 'index',
 	components: {
@@ -61,11 +53,38 @@ export default {
 	},
 	methods: {
 		addArticle () {
+			if (!this.content) {
+				this.$Message.warning('总要写点儿什么吧？')
+				return
+			}
+			if (!this.title) {
+				this.$Message.warning('标题呢？')
+				return
+			}
+			if (!this.cate) {
+				this.$Message.warning('选个分类吧？')
+				return
+			}
+			if (!this.tag) {
+				this.$Message.warning('标签呢？')
+				return
+			}
+			const data = {}
+			data.title = this.title
+			data.tag = this.tag
+			data.cate = this.cate
+			data.content = this.content
 			this.isLoading = true
-			setTimeout(() => {
-				this.isLoading = false
+			this.handlerSaveArticle(data)
+		},
+
+		// 保存文章
+		handlerSaveArticle (data) {
+			this.axios.post('/articles/save', data).then((result) => {
 				this.$Message.success('文章发布成功!')
-			}, 2000)
+				this.isLoading = false
+				debugger
+			})
 		}
 	}
 }

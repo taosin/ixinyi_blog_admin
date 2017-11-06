@@ -1,6 +1,7 @@
 <!-- 阅读轨迹 -->
 <template>
 	<div class="index articles-mng">
+		<h2>每天读的，值得分享的，都记录下来</h2>
 		<div class="index-main">
 			<Table border :columns="columns" :data="dataList"></Table>
 		</div>
@@ -26,12 +27,27 @@ export default {
 			},
 			{
 				title: 'url',
-				key: 'url'
+				key: 'url',
+				render: (h, params) => {
+					return h('a', {
+							props: {
+								type: 'primary',
+								size: 'small'
+							},
+							style: {
+								marginRight: '5px'
+							},
+							on: {
+								click: () => {
+									window.open(params.row.url)
+								}
+							}
+						}, '查看')
+				}
 			},
 			{
 				title: '操作',
 				key: 'action',
-				width: 150,
 				align: 'center',
 				render: (h, params) => {
 					return h('div', [
@@ -81,6 +97,7 @@ export default {
 				start: start,
 				limit: this.limit
 			}
+			data.sis = 22
 			this.axios.get('/articles/readInfos', {
 				params: data
 			}).then((result) => {
@@ -95,17 +112,36 @@ export default {
 		},
 		onAdd () {
 			this.$router.push('/articles/add')
+		},
+		register () {
+			const data = {}
+			data.username = 'taoxin'
+			data.password = '222222'
+			this.axios.post('/user/signUp', data).then((result) => {
+				// debugger
+			})
+		},
+		login () {
+			const data = {}
+			data.username = 'taoxin'
+			data.password = '222222'
+			this.axios.post('/user/logIn', data).then((result) => {
+				// debugger
+			})
 		}
 	}
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .index-header{
 	padding: 10px 0;
 }
 .index-pagination{
 	padding: 10px 0;
 	float: right;
+}
+h2{
+	margin: 10px 5px;
 }
 </style>
