@@ -5,10 +5,10 @@
 			<Button type="info" @click="onAdd">发布文章</Button>
 		</div>
 		<div class="index-main">
-			<Table border :columns="columns7" :data="data6"></Table>
+			<Table border :columns="columns" :data="dataList"></Table>
 		</div>
 		<div class="index-pagination">
-			<Page :total="100" show-elevator show-total show-sizer></Page>
+			<Page :total="total" show-elevator show-total show-sizer></Page>
 		</div>
 	</div>
 </template>
@@ -18,36 +18,26 @@ export default {
 	name: 'articles_mng',
 	data () {
 		return {
-			columns7: [
+			columns: [
 			{
 				title: '标题',
-				key: 'name',
-				render: (h, params) => {
-					return h('div', [
-						h('Icon', {
-							props: {
-								type: 'person'
-							}
-						}),
-						h('strong', params.row.name)
-						])
-				}
+				key: 'title'
 			},
 			{
 				title: '状态',
-				key: 'age'
+				key: 'state'
 			},
 			{
 				title: '评论数量',
-				key: 'address'
+				key: 'recomment'
 			},
 			{
-				title: '发布bk时间',
-				key: 'address'
+				title: '发布时间',
+				key: 'createdAt'
 			},
 			{
 				title: '更新时间',
-				key: 'address'
+				key: 'createdAt'
 			},
 			{
 				title: '操作',
@@ -85,33 +75,36 @@ export default {
 				}
 			}
 			],
-			data6: [
-			{
-				name: '王小明',
-				age: 18,
-				address: '北京市朝阳区芍药居'
-			},
-			{
-				name: '张小刚',
-				age: 25,
-				address: '北京市海淀区西二旗'
-			},
-			{
-				name: '李小红',
-				age: 30,
-				address: '上海市浦东新区世纪大道'
-			},
-			{
-				name: '周小伟',
-				age: 26,
-				address: '深圳市南山区深南大道'
-			}
-			]
+			dataList: [],
+			start: 0,
+			limit: 20,
+			total: 0
 		}
+	},
+	mounted () {
+		this.initData(0)
 	},
 	methods: {
 		onAdd () {
 			this.$router.push('/articles/add')
+		},
+			// 初始化数据
+		initData (start) {
+			const data = {}
+			data.page = {
+				start: start,
+				limit: this.limit
+			}
+			this.axios.get('/articles/query', {
+				params: data
+			}).then((result) => {
+				this.dataList = result.data.records
+				this.total = result.data.total
+			})
+		},
+		show (index) {
+		},
+		remove (index) {
 		}
 	}
 }

@@ -30,10 +30,10 @@
 			<textarea v-model="content" debounce="300" placeholder="请输入你想要输入的内容"></textarea>
 		</div>
 	</div>
-</template>
+</template> 
 <script>
+const marked = require('markdown-js')
 export default {
-	name: 'index',
 	components: {
 	},
 	data () {
@@ -73,17 +73,18 @@ export default {
 			data.title = this.title
 			data.tag = this.tag
 			data.cate = this.cate
-			data.content = this.content
+			data.content = marked.makeHtml(this.content)
 			this.isLoading = true
 			this.handlerSaveArticle(data)
 		},
 
 		// 保存文章
 		handlerSaveArticle (data) {
+			const url = '/articles/list'
 			this.axios.post('/articles/save', data).then((result) => {
 				this.$Message.success('文章发布成功!')
 				this.isLoading = false
-				debugger
+				this.$router.push(url)
 			})
 		}
 	}
