@@ -11,17 +11,36 @@
 		<div class="main-list">
 			<div class="list todo-list">
 				<div class="home-title">
+					<i class="ivu-icon ivu-icon-android-checkbox-outline"></i>
 					待办事项
 				</div>
+				<div class="list-main">
+					<ul>
+						<li v-for="(n,index) in 19" :key="index">
+							<Checkbox v-model="single">
+								<span class="content">{{list}}</span>
+							</Checkbox>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<div class="list article-list">
+			<div class="list recomment-list">
 				<div class="home-title">
-					文章数量
+					<i class="ivu-icon ivu-icon-ios-chatbubble"></i>
+					最新评论
+				</div>
+				<div class="list-main">
+					<ul>
+						<li>
+							<span class="null">无数据记录</span>
+						</li>
+					</ul>
 				</div>
 			</div>
 			<div class="list user-list">
 				<div class="home-title">
-					访客数量
+					<i class="ivu-icon ivu-icon-android-clipboard"></i>
+					留言板
 				</div>
 			</div>
 		</div>
@@ -29,36 +48,72 @@
 </template>
 
 <script>
-	export default {
-		name: 'index',
-		methods: {
-			gotoUrl (url) {
-				this.$router.push(url)
-			}
+export default {
+	data() {
+		return {
+			list: '今天下午要去学习新技术'
 		}
+	},
+	methods: {
+		gotoUrl(url) {
+			this.$router.push(url)
+		}
+	},
+	mounted() {
+		// ddd
 	}
+}
 </script>
 
 <style lang="less">
-.home{
-	.item-btns{
-		margin: 10px 0;
-	}
-	.main-list{
-		border: 1px solid #ddd;
-		padding: 10px;
-		border-radius: 4px;
-		overflow: hidden;
-		.list{
-			border: 1px solid #888;
-			width: 32%;
-			float: left;
-			padding: 10px;
-		}
-		.article-list{
-			margin: 0 2%;
-		}
-	}
+.home {
+  .item-btns {
+    margin: 10px 0;
+  }
+  .main-list {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+    overflow: hidden;
+    .list {
+      border: 1px solid #888;
+      width: 32%;
+      float: left;
+      padding: 5px 5px 10px;
+      border-radius: 3px;
+      .home-title {
+        border-bottom: 1px solid #888;
+        padding: 5px 10px 5px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .list-main {
+        height: 300px;
+        overflow: auto;
+        ul {
+          margin: 5px 5px;
+          li {
+            margin: 10px 0;
+            font-size: 14px;
+            font-weight: bold;
+            .content {
+              margin-left: 5px;
+						}
+						.null{
+							color: #888;
+							font-size: 15px;
+						}
+          }
+        }
+      }
+    }
+    .todo-list {
+      width: 250px;
+    }
+    .recomment-list {
+      margin: 0 1%;
+    }
+  }
 }
 </style>
 

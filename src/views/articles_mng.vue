@@ -16,64 +16,64 @@
 <script>
 export default {
 	name: 'articles_mng',
-	data () {
+	data() {
 		return {
 			columns: [
-			{
-				title: '标题',
-				key: 'title'
-			},
-			{
-				title: '状态',
-				key: 'state'
-			},
-			{
-				title: '评论数量',
-				key: 'recomment'
-			},
-			{
-				title: '发布时间',
-				key: 'createdAt'
-			},
-			{
-				title: '更新时间',
-				key: 'createdAt'
-			},
-			{
-				title: '操作',
-				key: 'action',
-				width: 150,
-				align: 'center',
-				render: (h, params) => {
-					return h('div', [
-						h('Button', {
-							props: {
-								type: 'primary',
-								size: 'small'
-							},
-							style: {
-								marginRight: '5px'
-							},
-							on: {
-								click: () => {
-									this.show(params.index)
+				{
+					title: '标题',
+					key: 'title'
+				},
+				{
+					title: '状态',
+					key: 'state'
+				},
+				{
+					title: '评论数量',
+					key: 'recomment'
+				},
+				{
+					title: '发布时间',
+					key: 'createdAt'
+				},
+				{
+					title: '更新时间',
+					key: 'createdAt'
+				},
+				{
+					title: '操作',
+					key: 'action',
+					width: 150,
+					align: 'center',
+					render: (h, params) => {
+						return h('div', [
+							h('Button', {
+								props: {
+									type: 'primary',
+									size: 'small'
+								},
+								style: {
+									marginRight: '5px'
+								},
+								on: {
+									click: () => {
+										this.show(params.index)
+									}
 								}
-							}
-						}, '查看'),
-						h('Button', {
-							props: {
-								type: 'error',
-								size: 'small'
-							},
-							on: {
-								click: () => {
-									this.remove(params.index)
+							}, '查看'),
+							h('Button', {
+								props: {
+									type: 'error',
+									size: 'small'
+								},
+								on: {
+									click: () => {
+										this.remove(params.index)
+									}
 								}
-							}
-						}, '删除')
+							}, '删除')
 						])
+					}
 				}
-			}
 			],
 			dataList: [],
 			start: 0,
@@ -81,43 +81,45 @@ export default {
 			total: 0
 		}
 	},
-	mounted () {
+	mounted() {
 		this.initData(0)
 	},
 	methods: {
-		onAdd () {
+		onAdd() {
 			this.$router.push('/articles/add')
 		},
-			// 初始化数据
-		initData (start) {
+		// 初始化数据
+		initData(start) {
 			const data = {}
 			data.page = {
 				start: start,
 				limit: this.limit
 			}
-			this.axios.get('/articles/query', {
+			this.axios.get('/articles', {
 				params: data
 			}).then((result) => {
 				this.dataList = result.data.records
 				this.total = result.data.total
 			})
 		},
-		show (index) {
+		show(index) {
 		},
-		remove (index) {
+		remove(index) {
+			this.axios.delete('/article/' + index).then((result) => {
+				debugger
+			})
 		}
 	}
 }
 </script>
 
 <style lang="less">
-.index-header{
-	padding: 10px 0;
+.index-header {
+  padding: 10px 0;
 }
-.index-pagination{
-	padding: 10px 0;
-	float: right;
+.index-pagination {
+  padding: 10px 0;
+  float: right;
 }
-
 </style>
 
