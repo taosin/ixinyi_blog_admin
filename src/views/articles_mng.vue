@@ -67,7 +67,7 @@ export default {
 								},
 								on: {
 									click: () => {
-										this.remove(params.index)
+										this.remove(params)
 									}
 								}
 							}, '删除')
@@ -104,8 +104,9 @@ export default {
 		},
 		show(index) {
 		},
-		remove(index) {
-			this.axios.delete('/article/' + index).then((result) => {
+		remove(data) {
+			const id = data.row.objectId
+			this.axios.delete('/article/' + id).then((result) => {
 				debugger
 			})
 		}
