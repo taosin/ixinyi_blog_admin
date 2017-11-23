@@ -5,7 +5,7 @@
 		</div>
 		<div class="index-m-tag-cate index-m-div">
 			<div class="index-m-tag">
-				<Input v-model="tag" placeholder="标签" size="large"></Input>
+				<Input v-model="tag" placeholder="标大大大大签" size="large"></Input>
 			</div>
 			<div class="index-m-cate">
 				<Input v-model="cate" placeholder="分类" size="large"></Input>
