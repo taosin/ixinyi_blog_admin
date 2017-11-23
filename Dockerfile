@@ -1,5 +1,5 @@
 
-FROM node:6.10.3-slim
+FROM node:4.2.2
 
 RUN apt-get update \  
   && apt-get install -y nginx
