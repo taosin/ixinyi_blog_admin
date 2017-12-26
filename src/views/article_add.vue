@@ -5,7 +5,7 @@
 		</div>
 		<div class="index-m-tag-cate index-m-div">
 			<div class="index-m-tag">
-				<Input v-model="tag" placeholder="标大大大大签" size="large"></Input>
+				<Input v-model="tag" placeholder="标签" size="large"></Input>
 			</div>
 			<div class="index-m-cate">
 				<Input v-model="cate" placeholder="分类" size="large"></Input>
@@ -81,7 +81,7 @@ export default {
 		// 保存文章
 		handlerSaveArticle (data) {
 			const url = '/articles/list'
-			this.axios.post('/articles/save', data).then((result) => {
+			this.axios.post('/article', data).then((result) => {
 				this.$Message.success('文章发布成功!')
 				this.isLoading = false
 				this.$router.push(url)
