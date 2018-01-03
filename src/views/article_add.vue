@@ -1,15 +1,15 @@
 <template>
 	<div class="index-m">
 		<div class="index-m-title index-m-div">
-			<Input v-model="title" placeholder="标题" size="large"></Input>
+			<Input v-model="title" placeholder="Enter title..." size="large"></Input>
 		</div>
 		<div class="index-m-tag-cate index-m-div">
 			<div class="index-m-tag">
-				<Input v-model="tag" placeholder="标签" size="large"></Input>
+				<Input v-model="tag" placeholder="Enter tag..." size="large"></Input>
 			</div>
-			<div class="index-m-cate">
-				<Input v-model="cate" placeholder="分类" size="large"></Input>
-			</div>
+		</div>
+		<div style="margin:10px 10px;">
+			<Input v-model="desc" placeholder="Enter describe..." size="large" type="textarea" autosize="true"></Input>
 		</div>
 		<div class="index-m-toolbar index-m-div">
 			<Tooltip content="插入图片" placement="top-start">
@@ -27,7 +27,7 @@
 			<Button type="ghost" icon="ios-paperplane-outline" style="float:right" @click="addArticle" :loading="isLoading">发布文章</Button>
 		</div>
 		<div class="index-m-textarea index-m-div">
-			<textarea v-model="content" debounce="300" placeholder="请输入你想要输入的内容"></textarea>
+			<textarea v-model="content" debounce="300" placeholder="Enter content..."></textarea>
 		</div>
 	</div>
 </template> 
@@ -41,7 +41,7 @@ export default {
 			content: '',
 			title: '',
 			tag: '',
-			cate: '',
+			desc: '',
 			isLoading: false
 		}
 	},
@@ -61,8 +61,8 @@ export default {
 				this.$Message.warning('标题呢？')
 				return
 			}
-			if (!this.cate) {
-				this.$Message.warning('选个分类吧？')
+			if (!this.desc) {
+				this.$Message.warning('写点儿描述吧？')
 				return
 			}
 			if (!this.tag) {
@@ -72,7 +72,7 @@ export default {
 			const data = {}
 			data.title = this.title
 			data.tag = this.tag
-			data.cate = this.cate
+			data.desc = this.desc
 			data.content = marked.makeHtml(this.content)
 			this.isLoading = true
 			this.handlerSaveArticle(data)
@@ -110,8 +110,8 @@ export default {
 	}
 	.index-m-div{
 		margin:10px 10px;
-		height: 40px;	
 		clear: both;
+		height: 40px;
 	}
 	.index-m-textarea{
 		textarea{
